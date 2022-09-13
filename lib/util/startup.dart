@@ -5,14 +5,14 @@ import '../Firstpage.dart';
 import '../doctorpage.dart';
 import '../videos/videos.dart';
 
-class Startup extends StatefulWidget {
-  const Startup({Key? key}) : super(key: key);
+class StartupPage extends StatefulWidget {
+  const StartupPage({Key? key}) : super(key: key);
 
   @override
-  State<Startup> createState() => _MyStatefulWidgetState();
+  State<StartupPage> createState() => _MyStatefulWidgetState();
 }
 
-class _MyStatefulWidgetState extends State<Startup> {
+class _MyStatefulWidgetState extends State<StartupPage> {
   int _selectedIndex = 0;
   static final List<Widget> _widgetOptions = <Widget>[
     const FirstPage(),

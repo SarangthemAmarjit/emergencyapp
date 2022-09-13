@@ -1,12 +1,17 @@
 // ignore_for_file: file_names
 
+import 'dart:developer';
+
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 import 'package:lottie/lottie.dart';
 import 'package:otp/Model/DoctorCardmodel.dart';
 import 'package:otp/doctorpage.dart';
+import 'package:otp/logic.dart';
 import 'package:otp/services/serviceapi.dart';
 import 'package:otp/util/category_card.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'Doctorprofile/doctorprofile.dart';
 
@@ -71,13 +76,58 @@ class _FirstPageState extends State<FirstPage> {
                       ),
                     ],
                   ),
-                  Container(
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      color: Colors.deepPurple[100],
-                      borderRadius: BorderRadius.circular(12),
+                  InkWell(
+                    onTap: () {
+                      showDialog(
+                          context: context,
+                          builder: ((context) {
+                            return AlertDialog(
+                              title: const Text('Confirm'),
+                              content: const Text('Do You Want to Logout'),
+                              actions: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                            primary: Colors.green),
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child: const Text("CANCEL")),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 10),
+                                      child: ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                              primary: Colors.green),
+                                          onPressed: () async {
+                                            log('Log Out');
+                                            SharedPreferences prefs =
+                                                await SharedPreferences
+                                                    .getInstance();
+                                            if (prefs.containsKey("token")) {
+                                              prefs.remove("token");
+
+                                              context.router
+                                                  .replaceNamed('/login');
+                                            }
+                                          },
+                                          child: const Text("YES")),
+                                    )
+                                  ],
+                                ),
+                              ],
+                            );
+                          }));
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: Colors.deepPurple[100],
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: const Icon(Icons.logout),
                     ),
-                    child: const Icon(Icons.person),
                   )
                 ],
               ),

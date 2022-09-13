@@ -228,6 +228,7 @@ class _FirstPageState extends State<FirstPage> {
               child: Padding(
                   padding: const EdgeInsets.all(4.0),
                   child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
                       itemCount: doctorcardlist.length,
                       itemBuilder: (c, i) {
                         return InkWell(

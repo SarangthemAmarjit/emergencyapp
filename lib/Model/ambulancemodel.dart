@@ -27,7 +27,7 @@ class AmbulanceModel {
   final int id;
 
   factory AmbulanceModel.fromJson(Map<String, dynamic> json) => AmbulanceModel(
-        ambulanceDetail: json["ambulance_detail"],
+        ambulanceDetail: AmbulanceDetail.fromJson(json["ambulance_detail"]),
         ambulanceImage: json["ambulance_image"],
         ambulanceName: json["ambulance_name"],
         ambulanceType: json["ambulance_type"],
